@@ -14,6 +14,7 @@ from collections import deque, namedtuple
 
 from src.agent import Agent
 from src.train import dqn
+import src.config as config
 
 env = gym.make('LunarLander-v2')
 observation, info = env.reset(seed=42)
@@ -26,7 +27,7 @@ device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 agent = Agent(state_size=8, action_size=4, seed=0, device=device)
 scores = dqn(agent, env, device, n_episodes=10)
 
-if visualise:
+if config.visualise:
     agent = Agent(state_size=8, action_size=4, seed=0)
     show_video_of_model(agent, 'LunarLander-v2')
     show_video('LunarLander-v2')
